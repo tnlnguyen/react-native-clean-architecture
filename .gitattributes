@@ -1,0 +1,5 @@
+*.pbxproj binary linguist-generated
+ios/Exponent.xcodeproj/project.pbxproj merge=union -text diff linguist-generated
+packages/*/build/** -diff linguist-generated
+packages/*/plugin/build/** -diff linguist-generated
+packages/@*/*/build/** -diff linguist-generated
