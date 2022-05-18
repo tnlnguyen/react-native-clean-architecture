@@ -9,24 +9,33 @@ import Header from '~Base/Components/Header/Header';
 import Button from '~Base/Components/Button/Button';
 import TextInput from '~Base/Components/Input/Input';
 import AuthMessage from '~Core/Messages/Auth';
+import { useAppDispatch } from '~Store/Hook';
+import { setUser } from '~Store/Features/Auth/AuthSlice'
+
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const { formatMessage } = useIntl();
+  const dispatch = useAppDispatch();
 
   const onLoginPressed = async () => {
     const data = {
       email,
       password,
     };
-    const result = await authenticate(data);
-    // const result = true;
+    // const result = await authenticate(data);
 
-    if (result) {
+    // dispatch(setUser(result))
+
+    if (true) {
       navigation.navigate({ name: SCREEN.HOME, params: {} });
     }
   };
+
+  const onPress = () => {
+    //Code
+  }
 
   return (
     <Background>

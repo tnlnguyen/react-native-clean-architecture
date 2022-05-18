@@ -1,14 +1,8 @@
-import { AppRegistry } from 'react-native';
+import { registerRootComponent } from 'expo';
+
 import App from './App';
-import { name as appName } from './app.json';
 
-const _XHR = GLOBAL.originalXMLHttpRequest
-  ? GLOBAL.originalXMLHttpRequest
-  : (GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest);
-XMLHttpRequest = _XHR;
-
-async function handleBackgroundMessage(message) {
-  return Promise.resolve();
-}
-
-AppRegistry.registerComponent(appName, () => App);
+// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
+// It also ensures that whether you load the app in Expo Go or in a native build,
+// the environment is set up appropriately
+registerRootComponent(App);

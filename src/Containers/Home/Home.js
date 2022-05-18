@@ -4,10 +4,16 @@ import CalendarScreen from './Components/CalendarScreen/CalendarScreen';
 import InboxScreen from './Components/InboxScreen/InboxScreen';
 import InsightScreen from './Components/InsightScreen/InsightScreen';
 import SettingScreen from './Components/SettingScreen/SettingScreen';
+import { useAppSelector } from '~Store/Hook';
+import { getUser } from '~Store/Features/Auth/AuthSelector';
 
 const Tab = createBottomTabNavigator();
 
-const Home = ({}) => {
+const Home = ({ navigation }) => {
+  // const { params } = navigation;
+  // const screenParams = navigation.params;
+  const authData = useAppSelector(getUser);
+
   return (
     <>
       <Tab.Navigator>

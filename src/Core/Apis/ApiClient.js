@@ -3,14 +3,13 @@ import { setToken, getNewToken, getToken, getRefreshToken, logout } from '~Core/
 import { AppUrl } from '~Config';
 import { HeaderKey } from '~Core/Utils/Enum';
 import { SCREEN } from '~Core/Utils/Screens';
-import { API_URL } from '@env';
 
 const requestInterceptor = async (config) => {
   const token = await getToken();
   if (!!token) {
     config.headers[HeaderKey.AUTH_HEADER_KEY] = token;
   }
-  console.log('adsf', API_URL)
+
   console.log('API::REQUEST', config);
   return config;
 };
@@ -26,9 +25,9 @@ const responseInterceptor = async (response) => {
   return response;
 };
 
-export const buildClient = (config, enableInterceptor = true) => {
+export const buildClient = (config, enableInterceptor = true, requestInterceptor) => {
   const instance = axios.create(config);
-  console.log(instance);
+
   if (enableInterceptor) {
     instance.interceptors.request.use(requestInterceptor);
     instance.interceptors.response.use(responseInterceptor);
