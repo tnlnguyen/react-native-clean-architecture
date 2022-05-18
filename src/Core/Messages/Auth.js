@@ -1,12 +1,24 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  warningText2: {
-    id: 'bluezone.auth.warningText2',
-    defaultMessage: ' ',
+  forgotPassword: {
+    id: 'login.forgot',
+    defaultMessage: 'Forgot Password?',
   },
-  warningText3: {
-    id: 'bluezone.auth.warningText2',
-    defaultMessage: ' ',
+  dontHaveAccount: {
+    id: 'login.dontHaveAccount',
+    defaultMessage: 'Don’t have an account? ',
+  },
+  signUp: {
+    id: 'login.signUp',
+    defaultMessage: 'Sign up',
+  },
+  login: {
+    id: 'login.title',
+    defaultMessage: 'Login',
+  },
+  title: {
+    id: 'login.header.title',
+    defaultMessage: '',
   },
 });

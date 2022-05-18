@@ -21,7 +21,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <LanguageProvider messages={translationMessages}>
+        <LanguageProvider messages={translationMessages} language={'en'}>
           <SafeAreaProvider>
             <View style={styles.box}>
               <NavigationContainer ref={navigationRef}>

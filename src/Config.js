@@ -1,9 +1,7 @@
-import Config from 'react-native-config';
+import { API_URL } from '@env';
 
 const AppUrl = {
-	API_URL: Config.API_URL || '<default_url>'
-}
+  API_URL: API_URL || '<default_url>',
+};
 
-export {
-	AppUrl
-}
+export { AppUrl };

@@ -1,15 +1,17 @@
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { reset } from '~Base/Navigation/Navigation';
 import { AuthKey } from '~Core/Utils/Enum';
 import { AppUrl } from '~Config';
 
+
 const refreshing = null;
 
-const setToken = (credentials) => {
+const setToken = async (credentials) => {
   // Cleanup old token
-  localStorage.removeItem(AuthKey.ACCESS_TOKEN_KEY);
-  localStorage.setItem(AuthKey.ACCESS_TOKEN_KEY, credentials.accessToken);
-  localStorage.setItem(AuthKey.REFRESH_TOKEN_KEY, credentials.refreshToken);
+  await AsyncStorage.removeItem(AuthKey.ACCESS_TOKEN_KEY);
+  await AsyncStorage.setItem(AuthKey.ACCESS_TOKEN_KEY, credentials.accessToken);
+  await AsyncStorage.setItem(AuthKey.REFRESH_TOKEN_KEY, credentials.refreshToken);
 
   // We can force the expires time for testing purposes
   const expiresIn = parseInt(credentials.expiresIn);
@@ -20,8 +22,8 @@ const setToken = (credentials) => {
   const tokenExpiry = new Date(currentTime + expiresIn * 1000).getTime();
   const refreshTokenExpiry = new Date(currentTime + refreshExpiresIn * 1000).getTime();
 
-  localStorage.setItem(AuthKey.ACCESS_TOKEN_EXPIRY_KEY, tokenExpiry.toString());
-  localStorage.setItem(AuthKey.REFRESH_TOKEN_EXPIRY_KEY, refreshTokenExpiry.toString());
+  await AsyncStorage.setItem(AuthKey.ACCESS_TOKEN_EXPIRY_KEY, tokenExpiry.toString());
+  await AsyncStorage.setItem(AuthKey.REFRESH_TOKEN_EXPIRY_KEY, refreshTokenExpiry.toString());
 };
 
 const getNewToken = async () => {
@@ -36,12 +38,12 @@ const getNewToken = async () => {
 };
 
 const getToken = async () => {
-  const currentToken = localStorage.getItem(AuthKey.ACCESS_TOKEN_KEY);
+  const currentToken = await AsyncStorage.getItem(AuthKey.ACCESS_TOKEN_KEY);
   if (!currentToken) {
     return null;
   }
 
-  const tokenExpiry = localStorage.getItem(AuthKey.ACCESS_TOKEN_EXPIRY_KEY);
+  const tokenExpiry = await AsyncStorage.getItem(AuthKey.ACCESS_TOKEN_EXPIRY_KEY);
   const currentTime = new Date().getTime();
 
   if (tokenExpiry > currentTime) {
@@ -49,7 +51,7 @@ const getToken = async () => {
     return currentToken;
   }
 
-  const refreshTokenExpiry = localStorage.getItem(AuthKey.REFRESH_TOKEN_EXPIRY_KEY);
+  const refreshTokenExpiry = await AsyncStorage.getItem(AuthKey.REFRESH_TOKEN_EXPIRY_KEY);
   if (refreshTokenExpiry > currentTime) {
     // Refresh token valid, refreshing token..
     if (!refreshing) {
@@ -59,19 +61,19 @@ const getToken = async () => {
     await refreshing;
     refreshing = null;
 
-    return localStorage.getItem(AuthKey.ACCESS_TOKEN_KEY);
+    return await AsyncStorage.getItem(AuthKey.ACCESS_TOKEN_KEY);
   }
 
   return null;
 };
 
-const getRefreshToken = () => {
-  return localStorage.getItem(AuthKey.REFRESH_TOKEN_KEY);
+const getRefreshToken = async () => {
+  return await AsyncStorage.getItem(AuthKey.REFRESH_TOKEN_KEY);
 };
 
-const logout = ({ name, params }) => {
-  localStorage.removeItem(AuthKey.ACCESS_TOKEN_KEY);
-  localStorage.removeItem(AuthKey.REFRESH_TOKEN_KEY);
+const logout = async ({ name, params }) => {
+  await AsyncStorage.removeItem(AuthKey.ACCESS_TOKEN_KEY);
+  await AsyncStorage.removeItem(AuthKey.REFRESH_TOKEN_KEY);
 	reset('LoginScreen')
 };
 

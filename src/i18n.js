@@ -1,7 +1,7 @@
 'use strict';
 
-import enTranslationMessages from '~Locales/en';
-import viTranslationMessages from '~Locales/vi';
+import enTranslationMessages from './Locales/en.json';
+import viTranslationMessages from './Locales/vi.json';
 
 const DEFAULT_LOCALE = 'en';
 const appLocales = ['vi', 'en'];

@@ -1,11 +1,7 @@
 {
-	"login.title": "Login",
-	"login.news.title": "Latest news",
-  "login.common.loading": "Loading ...",
-  "home.title": "Home",
-  "home.tab.home": "Dashboard",
-  "bluezone.tab.report": "Report",
-  "bluezone.tab.invite": "Share",
-  "bluezone.tab.about": "Introduction",
-  "bluezone.tab.faq": "FAQ"
+	"login.forgot": "Forgot your password?",
+	"login.dontHaveAccount": "Don’t have an account? ",
+  "login.signUp": "Sign Up",
+  "login.title": "Login",
+  "login.header.title": "Welcome back"
 }

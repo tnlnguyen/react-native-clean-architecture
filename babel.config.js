@@ -20,7 +20,6 @@ module.exports = function (api) {
             '~Store': './src/Store',
             '~Config': './src/Config',
             '~i18n': './src/i18n',
-
           },
           extensions: [
             '.ios.js',
@@ -32,6 +31,21 @@ module.exports = function (api) {
             '.ts',
             '.native.js',
           ],
+        },
+      ],
+      [
+        'module:react-native-dotenv',
+        {
+          envName: 'APP_ENV',
+          moduleName: '@env',
+          path: '.env',
+          blocklist: null,
+          allowlist: null,
+          blacklist: null, // DEPRECATED
+          whitelist: null, // DEPRECATED
+          safe: false,
+          allowUndefined: true,
+          verbose: false,
         },
       ],
     ],

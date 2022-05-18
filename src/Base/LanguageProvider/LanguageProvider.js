@@ -1,15 +1,12 @@
-'use strict';
-
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import { IntlProvider } from 'react-intl';
-import { Text } from 'react-native';
 
 class LanguageProvider extends React.Component {
   render() {
-    const { language } = this.context;
+    const {language} = this.props;
     const _language = !language || language === 'vi' ? 'vi' : 'en';
-    const { messages, children } = this.props;
+    const {messages, children} = this.props;
 
     return (
       <IntlProvider
@@ -17,7 +14,8 @@ class LanguageProvider extends React.Component {
         key={_language}
         onError={() => {}}
         messages={messages[_language]}
-        textComponent={Text}>
+        textComponent={React.Component}
+      >
         {React.Children.only(children)}
       </IntlProvider>
     );
